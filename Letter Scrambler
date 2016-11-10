@@ -1,0 +1,46 @@
+//[a,b,c,d,e,k,a,e,g,w]
+
+public class Letters {
+	String[] scrambled = new String[10];
+	private int count = 0;
+	
+	public void scramble(List<String> list){		
+		if (list.size() == 0) {
+			throw new NullPointerException ("Please input a valid list");
+		}		
+		//This will end my recursive call
+		if (list.size() == 1) {
+			//When the size of the list is 1, put that last number at the end of the "scrambled" array
+			scrambled[10 - list.size()] = (list.get(0));
+			//The "count" variable is for my unit test, to see if I covered all the unique permutations based on my list size
+			count++;
+			System.out.println( Arrays.toString(scrambled) );
+		} else {
+			//Each for-loop deals with a specific slot of the "scrambled" array
+			for (int x = 0; x < list.size(); x++ ){
+				//The "scrambled" array position is inversely proportional to the list of numbers that I have not used yet
+				scrambled[10 - list.size()] = (list.get(x));
+				//Once a number in the list is used, I remove it from my list and make a recursive scramble call on the new list
+				scramble(removeUsedElement(list, x));
+			}
+		}
+	}
+	
+	public int permutationCount() {
+		return count;
+	}
+	
+	private ArrayList<String> removeUsedElement (List<String> list, int toRemove){
+		ArrayList<String> arr = new ArrayList<String>(list);
+		arr.remove(toRemove);		
+		return arr;
+	}
+}
+		
+		
+		
+		
+		
+		
+		
+	
