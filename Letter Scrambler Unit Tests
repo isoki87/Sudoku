@@ -1,0 +1,69 @@
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.junit.Test;
+
+import List;
+
+public class LettersTest {
+
+	@Test
+	public void listIsNull() {
+		Letters letters = new Letters();
+		ArrayList<String> nullTest = new ArrayList<String>();
+		try {
+			letters.scramble(nullTest);
+			fail();
+		} catch (NullPointerException e) {
+		}	
+	}
+	
+	@Test
+	public void testListOf1() {
+		Letters letters = new Letters();
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("a");
+		assertEquals(1, test.size());
+		assertEquals( "[a]", test.toString());
+		letters.scramble(test);
+	}
+	
+	@Test
+	public void testListOf4() {
+		Letters letters = new Letters();
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("a");
+		test.add("b");
+		test.add("c");
+		test.add("d");		
+		assertEquals(4, test.size());
+		assertEquals( "[a, b, c, d]", test.toString());
+		letters.scramble(test);
+		assertEquals(24, letters.permutationCount());
+	}
+	
+	@Test
+	public void testListOf3() {
+		Letters letters = new Letters();
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("a");
+		test.add("b");
+		test.add("c");				
+		assertEquals(3, test.size());
+		assertEquals( "[a, b, c]", test.toString());
+		letters.scramble(test);
+		assertEquals(6, letters.permutationCount());
+	}
+	
+	@Test
+	public void solution() {		
+		ArrayList<String> toScramble = new ArrayList<String>( Arrays.asList("a", "b", "c", "d", "e", "k", "a", "e", "g", "w"));	
+		assertEquals(10, toScramble.size());
+		assertEquals("[a, b, c, d, e, k, a, e, g, w]", toScramble.toString());	
+		Letters letters = new Letters();
+		letters.scramble(toScramble);
+		assertEquals(3628800, letters.permutationCount());
+	}
+}
