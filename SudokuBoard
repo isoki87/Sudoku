@@ -1,0 +1,82 @@
+public class SudokuBoard {
+	private int[][] board;
+	
+	public SudokuBoard(){
+		this.board = new int[9][9];
+	}
+	
+	public void add(int num, int x, int y){
+		board[x][y] = num;
+	}
+	
+	public int check(int x, int y){
+		return board[x][y];
+	}
+	
+	public void displayBoard(){
+		displayInternal(0);
+	}
+	
+	public void displayProblem(String diff){
+		int diffLvl = 0;
+		switch(diff.toLowerCase()){
+			case("easy"): diffLvl = 1;
+						  break;
+			case("medium"): diffLvl = 2;
+							break;
+			case("hard"): diffLvl = 3;
+						  break;
+		}
+		displayInternal(diffLvl);
+	}
+	
+	private int detBlanks(int lvl){
+		int blanks = 0;
+		switch(lvl){
+			case 1: blanks = 40;
+					break;
+			case 2: blanks = 33;
+					break;
+			case 3: blanks = 28;
+					break;
+		}
+		return blanks;
+	}
+	
+	private boolean determineBlank(int blanks, int spaces){
+		//blanks out of spaces chances to become a blank at each slot
+		//insert probability logic in here
+		
+		
+		return true;
+	}
+	
+	private void displayInternal(int lvl){
+		int blanks = detBlanks(lvl);
+		int spaces = 81;
+		for(int i = 0; i < board.length; i++){
+			for(int j = 0; j < board[i].length; j++){
+				if(determineBlank(blanks, spaces)){
+					System.out.print(" ");
+					blanks--;
+				} else {
+					System.out.print(board[i][j]);
+				}
+				System.out.print("  ");
+				spaces--;
+			}
+			System.out.println("\n");
+		}
+	}
+	
+	public boolean checkAnswer(int[][] ans){
+		for(int i = 0; i < board.length; i++){
+			for(int j = 0; j < board[i].length; j++){
+				if(ans[i][j] != board[i][j]){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+}
