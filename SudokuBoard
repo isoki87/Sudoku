@@ -14,10 +14,10 @@ public class SudokuBoard {
     }
 
     public void displayBoard(){
-        displayInternal(0);
+        coverInternal(0);
     }
 
-    public void displayProblem(String diff){
+    public void cvr2Play(String diff){
         int diffLvl = 0;
         switch(diff.toLowerCase()){
             case("easy"): diffLvl = 1;
@@ -27,7 +27,7 @@ public class SudokuBoard {
             case("hard"): diffLvl = 3;
                 break;
         }
-        displayInternal(diffLvl);
+        coverInternal(diffLvl);
     }
 
     private int detBlanks(int lvl){
@@ -51,7 +51,7 @@ public class SudokuBoard {
         return false;
     }
 
-    private void displayInternal(int lvl){
+    private void coverInternal(int lvl){
         int blanks = detBlanks(lvl);
         int spaces = 81;
         for(int i = 0; i < board.length; i++){
