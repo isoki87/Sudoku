@@ -45,7 +45,7 @@ public class SudokuBoard {
 
     private boolean isBlank(int blanks, int spaces){
         double prob = ((double)(blanks)) / ((double)(spaces));
-        if(prob >= Math.random() * 1){
+        if(prob >= Math.random()){
             return true;
         }
         return false;
