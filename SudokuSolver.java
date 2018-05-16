@@ -11,32 +11,42 @@ public class SudokuSolver {
     for(int i = 0; i < 9; i++){
       for(int j = 0; j < 9; j++){
         if(!sudCheck(puzzle, puzzle[i][j], i, j)){
-	  return false;
-	}
+          return false;
+        }
       }
     }
     return true;
   }
 	
   private boolean solveInternal(int[][] board){
+    ArrayList<Integer> numList = createNumList();
     for(int row = 0; row < 9; row++){
       for(int column = 0; column < 9; column++){
         if(board[row][column] == 0){
-	  for(int num = 1; num < 10; num++){
-	    if(sudCheck(board, num, row, column)){
-	      board[row][column] = num;
-	      if(solveInternal(board)){
-		return true;
-	      } else {
-	        board[row][column] = 0;
-	      }
-	    }
+          Collections.shuffle(numList);
+          for(int i = 0; i < 9; i++){
+            if(sudCheck(board, numList.get(i), row, column)){
+              board[row][column] = numList.get(i);
+              if(solveInternal(board)){
+                return true;
+              } else {
+                board[row][column] = 0;
+              }
+            }
           }
-	  return false;
-	}
+          return false;
+        }
       }
     }
     return true;
+  }
+  
+  private ArrayList<Integer> createNumList(){
+    ArrayList<Integer> list = new ArrayList<>();
+    for(int i = 0; i < list.size(); i++){
+      list.add(i + 1);
+    }
+    return list;
   }
 	
   private boolean sudCheck(int[][] board, int num, int row, int column){
