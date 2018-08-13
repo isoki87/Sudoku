@@ -14,7 +14,7 @@ public class SudokuBoard {
     public int check(int x, int y){
         return board[x][y];
     }
-    
+   
     public int[][] showBoard(){
     	return board;
     }
@@ -22,4 +22,5 @@ public class SudokuBoard {
     public int[] showColumn(int row){
     	return board[row];
     }
+ 
 }
